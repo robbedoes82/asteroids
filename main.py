@@ -2,6 +2,7 @@
 # the open-source pygame library
 # throughout this file
 import pygame
+from player import Player
 from constants import *
 
 
@@ -10,6 +11,10 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0
+    x = SCREEN_WIDTH / 2
+    y = SCREEN_HEIGHT / 2
+    
+    player = Player(x, y)
 
     # game loop
     while True:
@@ -18,14 +23,12 @@ def main():
                 return
             
         screen.fill("black")
+        player.draw(screen)
         pygame.display.flip()
 
          # limit the framerate to 60 FPS
         dt = clock.tick(60)/1000
-
-    # print("Starting Asteroids!")
-    # print(f"Screen width: {SCREEN_WIDTH}")
-    # print(f"Screen height: {SCREEN_HEIGHT}")
+       
 
 
 if __name__ == "__main__":
