@@ -13,6 +13,11 @@ def main():
     dt = 0
     x = SCREEN_WIDTH / 2
     y = SCREEN_HEIGHT / 2
+
+    # denk dat dit voor de creatie van player moet komen als player in juiste container moet komen
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable) #hoeft niet in class zelf gedeclareerd te worden
     
     player = Player(x, y)
 
@@ -23,8 +28,10 @@ def main():
                 return
             
         screen.fill("black")
-        player.update(dt)
-        player.draw(screen)
+        updatable.update(dt)
+        # drawable.draw(screen) => geeft error??
+        for drawables in drawable:
+            drawables.draw(screen)
         pygame.display.flip()
 
          # limit the framerate to 60 FPS
