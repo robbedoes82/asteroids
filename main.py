@@ -3,6 +3,8 @@
 # throughout this file
 import pygame
 from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 from constants import *
 
 
@@ -17,9 +19,13 @@ def main():
     # denk dat dit voor de creatie van player moet komen als player in juiste container moet komen
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
+
     Player.containers = (updatable, drawable) #hoeft niet in class zelf gedeclareerd te worden
-    
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = (updatable)
     player = Player(x, y)
+    asteroid_field = AsteroidField()
 
     # game loop
     while True:
@@ -29,9 +35,11 @@ def main():
             
         screen.fill("black")
         updatable.update(dt)
+
         # drawable.draw(screen) => geeft error??
-        for drawables in drawable:
-            drawables.draw(screen)
+        for obj in drawable:
+            obj.draw(screen)
+
         pygame.display.flip()
 
          # limit the framerate to 60 FPS
