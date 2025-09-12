@@ -6,6 +6,7 @@ import sys
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
 from constants import *
 
 
@@ -21,10 +22,13 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
 
     Player.containers = (updatable, drawable) #hoeft niet in class zelf gedeclareerd te worden
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
+    Shot.containers = (updatable, drawable)
+    
     player = Player(x, y)
     asteroid_field = AsteroidField()
 
@@ -48,7 +52,8 @@ def main():
 
         pygame.display.flip()
 
-         # limit the framerate to 60 FPS
+         # limit the framerate to 60 FPS (clock.tick(60))
+         # dt = aantal seconden dat gepasseerd is sinds laatste tick
         dt = clock.tick(60)/1000
        
 
