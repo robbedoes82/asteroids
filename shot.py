@@ -13,9 +13,6 @@ class Shot(CircleShape):
     def update(self, dt):
         self.position += (self.velocity * dt)
 
-    # probeersel, niet zeker of het hier hoort:
-    # def rotate(self, dt):
-    #     self.rotation += PLAYER_TURN_SPEED * dt
     
 
 
