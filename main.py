@@ -26,7 +26,7 @@ def main():
 
     Player.containers = (updatable, drawable) #hoeft niet in class zelf gedeclareerd te worden
     Asteroid.containers = (asteroids, updatable, drawable)
-    AsteroidField.containers = (updatable)
+    AsteroidField.containers = ((updatable))
     Shot.containers = (shots, updatable, drawable) #belangrijk om ook tot container "shots" te behoren, anders kan je er niet over itereren
     
     player = Player(x, y)
@@ -42,15 +42,16 @@ def main():
 
         updatable.update(dt)
 
-        for obj in asteroids:
-            if obj.collision(player):
+        for asteroid in asteroids:
+            if asteroid.collision(player):
                 print("Game Over!")
                 sys.exit()
 
             for shot in shots:
-                if obj.collision(shot):
-                    obj.kill()
+                if asteroid.collision(shot):
                     shot.kill()
+                    asteroid.split()
+                    
 
 
         for obj in drawable:
